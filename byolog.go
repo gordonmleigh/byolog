@@ -6,6 +6,11 @@ type Field struct {
 	Value interface{}
 }
 
+// NewField creates a new field.
+func NewField(name string, value interface{}) *Field {
+	return &Field{Name: name, Value: value}
+}
+
 // Logger represents any structured logger.
 type Logger interface {
 	Error(msg string, fields ...Field)
