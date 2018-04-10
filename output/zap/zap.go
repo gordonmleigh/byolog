@@ -13,7 +13,7 @@ type zapLogger struct {
 // New creates a byolog instance from a zap instance
 func New(logger *zap.Logger) byolog.Logger {
 	return &zapLogger{
-		zap: logger,
+		zap: logger.WithOptions(zap.AddCallerSkip(1)),
 	}
 }
 
