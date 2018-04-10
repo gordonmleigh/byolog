@@ -13,24 +13,24 @@ type zapLogger struct {
 // New creates a byolog instance from a zap instance
 func New(logger *zap.Logger) byolog.Logger {
 	return &zapLogger{
-		zap: logger.WithOptions(zap.AddCallerSkip(1)),
+		zap: logger,
 	}
 }
 
 func (l *zapLogger) Error(msg string, fields ...byolog.Field) {
-	l.zap.Error(msg, convertFields(fields)...)
+	l.zap.WithOptions(zap.AddCallerSkip(1)).Error(msg, convertFields(fields)...)
 }
 
 func (l *zapLogger) Warn(msg string, fields ...byolog.Field) {
-	l.zap.Warn(msg, convertFields(fields)...)
+	l.zap.WithOptions(zap.AddCallerSkip(1)).Warn(msg, convertFields(fields)...)
 }
 
 func (l *zapLogger) Info(msg string, fields ...byolog.Field) {
-	l.zap.Info(msg, convertFields(fields)...)
+	l.zap.WithOptions(zap.AddCallerSkip(1)).Info(msg, convertFields(fields)...)
 }
 
 func (l *zapLogger) Debug(msg string, fields ...byolog.Field) {
-	l.zap.Debug(msg, convertFields(fields)...)
+	l.zap.WithOptions(zap.AddCallerSkip(1)).Debug(msg, convertFields(fields)...)
 }
 
 func (l *zapLogger) With(fields ...byolog.Field) byolog.Logger {
